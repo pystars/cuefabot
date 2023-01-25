@@ -1,13 +1,20 @@
 import json
 import logging
 
+import boto3
 from telebot import TeleBot
-
 from telebot.types import InlineQueryResultArticle, InputTextMessageContent, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
 TOKEN = '5893559533:AAEC611IodpKNXTqqWST64biBGrECDsrDBs'
 bot = TeleBot(TOKEN)
+
+session = boto3.session.Session()
+s3 = session.client(
+    service_name='s3',
+    endpoint_url='https://storage.yandexcloud.net'
+)
+
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
